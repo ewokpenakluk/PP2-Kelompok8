@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="autoMappingBehavior" value="FULL"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>
+        <setting name="logImpl" value="SLF4J"/>
+    </settings>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/tubes_pp_ii"/>
+                <property name="username" value="root"/>
+                <property name="password" value=""/>
+                <property name="poolMaximumActiveConnections" value="10"/>
+                <property name="poolMaximumIdleConnections" value="5"/>
+                <property name="poolMaximumCheckoutTime" value="20000"/>
+                <property name="poolTimeToWait" value="20000"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper class="model.mapper.UserMapper"/>
+        <mapper class="model.mapper.KategoriMapper"/>
+        <mapper class="model.mapper.SampahMapper"/>
+        <mapper class="model.mapper.LokasiMapper"/>
+        <mapper class="model.mapper.DropBoxMapper"/>
+        <mapper class="model.mapper.KurirMapper"/>
+        <mapper class="model.mapper.MasyarakatMapper"/>
+        <mapper class="model.mapper.HistoryPenjemputanMapper"/>
+    </mappers>
+
+</configuration>
