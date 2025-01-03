@@ -1,0 +1,71 @@
+<component name="libraryTable">
+  <library name="barcodes-7.2.5-sources">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/logback-core-1.4.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/slf4j-api-2.0.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/mysql-connector-j-8.0.33.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/mybatis-3.5.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/cglib-3.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/log4j-core-2.23.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/styled-xml-parser-7.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/jgoodies-looks-2.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/ognl-3.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/openpdf-2.0.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/slf4j-simple-2.0.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/slf4j-api-2.0.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/sign-7.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/junit-4.13.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/layout-7.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/mybatis-3.5.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/log4j-api-2.23.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/kernel-7.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/commons-logging-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/slf4j-simple-2.0.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/junit-4.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/pdftest-7.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/pdfa-7.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/asm-7.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/jcalendar-1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/jgoodies-common-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/io-7.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/jbcrypt-0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/slf4j-api-2.0.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/barcodes-7.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/lombok.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/javassist-3.30.2-GA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/forms-7.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/commons-7.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/reload4j-1.2.25.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/mysql-connector-j-9.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/logback-classic-1.4.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/svg-7.2.5.jar!/" />
+      <root url="file://$PROJECT_DIR$/../TUBES_PP_II" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/forms-7.2.5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/barcodes-7.2.5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/svg-7.2.5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/styled-xml-parser-7.2.5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/sign-7.2.5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/pdfa-7.2.5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/kernel-7.2.5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/pdftest-7.2.5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/io-7.2.5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/commons-7.2.5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/layout-7.2.5-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/barcodes-7.2.5-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/forms-7.2.5-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/pdftest-7.2.5-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/styled-xml-parser-7.2.5-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/sign-7.2.5-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/io-7.2.5-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/pdfa-7.2.5-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/layout-7.2.5-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/kernel-7.2.5-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TUBES/src/libs/svg-7.2.5-sources.jar!/" />
+      <root url="file://$PROJECT_DIR$/../TUBES_PP_II/TUBES/src" />
+    </SOURCES>
+  </library>
+</component>
