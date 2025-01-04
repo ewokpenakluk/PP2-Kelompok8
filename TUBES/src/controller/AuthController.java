@@ -24,6 +24,40 @@ public class AuthController {
     private AuthController() {
     }
 
+    public boolean handleLogin(String username, String password) {
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Username dan password harus diisi!",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        try (SqlSession session = MyBatisUtil.openSession()) {
+            UserMapper mapper = session.getMapper(UserMapper.class);
+            UserModel user = mapper.findByUsername(username);
+
+            if (user != null && BCrypt.checkpw(password, user.getPassword())) {
+                mapper.updateLastLogin(user.getId());
+                this.currentUser = user;
+                new DashboardView(user).setVisible(true);
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Username atau password salah!",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Error: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
     public boolean handleRegister(String username, String password, String confirmPassword,
                                   String namaLengkap, String email) {
         // Validasi input
