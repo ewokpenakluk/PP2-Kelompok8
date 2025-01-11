@@ -45,7 +45,7 @@ public class DashboardView extends JFrame {
     private JLabel totalDropBoxLabel;
 
     // Tabel
-    private JTable kategoriTable;
+    private JTable jenisSampahTable;
     private JTable kurirTable;
     private JTable masyarakatTable;
     private JTable dropboxTable;
@@ -88,7 +88,7 @@ public class DashboardView extends JFrame {
         sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
         sidebar.setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Bagian Header
+        // Header
         JLabel headerLabel = new JLabel("Bank Sampah");
         headerLabel.setFont(HEADER_FONT);
         headerLabel.setForeground(TEXT_LIGHT);
@@ -104,7 +104,7 @@ public class DashboardView extends JFrame {
         nameLabel.setForeground(TEXT_LIGHT);
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Tambah Komponen Header
+        // Add Header Components
         sidebar.add(headerLabel);
         sidebar.add(Box.createRigidArea(new Dimension(0, 20)));
         sidebar.add(welcomeLabel);
@@ -139,7 +139,6 @@ public class DashboardView extends JFrame {
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        // Efek Hover
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 button.setBackground(HOVER_COLOR);
@@ -150,7 +149,6 @@ public class DashboardView extends JFrame {
         });
 
         button.addActionListener(listener);
-
         sidebar.add(button);
         sidebar.add(Box.createRigidArea(new Dimension(0, 5)));
     }
@@ -187,18 +185,18 @@ public class DashboardView extends JFrame {
         tablesPanel.setOpaque(false);
 
         // Inisialisasi Tabel
-        String[] kategoriColumns = {"Kategori", "Total Penjemputan", "Total Berat", "Total Poin"};
-        String[] kurirColumns = {"Nama Kurir", "Total Penjemputan", "Total Berat"};
-        String[] masyarakatColumns = {"Nama", "Total Penjemputan", "Total Poin"};
-        String[] dropboxColumns = {"Drop Box", "Total Penjemputan", "Total Berat"};
+        String[] jenisSampahColumns = {"No.", "Jenis Sampah", "Total Penjemputan", "Total Berat", "Total Poin"};
+        String[] kurirColumns = {"No.", "Nama Kurir", "Total Penjemputan", "Total Berat"};
+        String[] masyarakatColumns = {"No.", "Nama", "Total Penjemputan", "Total Poin"};
+        String[] dropboxColumns = {"No.", "Drop Box", "Total Penjemputan", "Total Berat"};
 
-        kategoriTable = createTable(kategoriColumns);
+        jenisSampahTable = createTable(jenisSampahColumns);
         kurirTable = createTable(kurirColumns);
         masyarakatTable = createTable(masyarakatColumns);
         dropboxTable = createTable(dropboxColumns);
 
         // Tambah Tabel ke Panel
-        tablesPanel.add(createTablePanel("Statistik per Kategori", kategoriTable));
+        tablesPanel.add(createTablePanel("Top 10 Jenis Sampah", jenisSampahTable));
         tablesPanel.add(createTablePanel("Top 10 Kurir", kurirTable));
         tablesPanel.add(createTablePanel("Top 10 Masyarakat", masyarakatTable));
         tablesPanel.add(createTablePanel("Statistik per Drop Box", dropboxTable));
@@ -268,17 +266,20 @@ public class DashboardView extends JFrame {
         table.setShowGrid(true);
         table.setGridColor(BORDER_COLOR);
 
-        // Perataan Teks di Sel
+        // Center alignment for cells
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
-        // Perataan Kanan untuk Kolom Numerik
+        // Right alignment for numeric columns
         DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
         rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
 
-        // Terapkan Renderer
+        // Apply renderers
         for (int i = 0; i < table.getColumnCount(); i++) {
-            if (isNumericColumn(table.getColumnName(i))) {
+            if (i == 0) {  // Kolom nomor urut
+                table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+                table.getColumnModel().getColumn(i).setPreferredWidth(50);
+            } else if (isNumericColumn(table.getColumnName(i))) {
                 table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
             } else {
                 table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
@@ -303,11 +304,12 @@ public class DashboardView extends JFrame {
         });
     }
 
-    public void updateKategoriTable(List<HistoryPenjemputanModel> stats) {
-        updateTable(kategoriTable, stats, (model, stat) -> {
-            if (stat.getKategori() != null) {
+    public void updateJenisSampahTable(List<HistoryPenjemputanModel> stats) {
+        updateTable(jenisSampahTable, stats, (model, stat, index) -> {
+            if (stat.getSampah() != null) {
                 model.addRow(new Object[]{
-                        stat.getKategori().getNamaKategori(),
+                        index + 1,
+                        stat.getSampah().getNamaSampah(),
                         formatNumber(stat.getJumlahPenjemputan()),
                         formatNumber(stat.getTotalBerat()),
                         formatNumber(stat.getTotalPoin())
@@ -317,9 +319,10 @@ public class DashboardView extends JFrame {
     }
 
     public void updateKurirTable(List<HistoryPenjemputanModel> stats) {
-        updateTable(kurirTable, stats, (model, stat) -> {
+        updateTable(kurirTable, stats, (model, stat, index) -> {
             if (stat.getKurir() != null) {
                 model.addRow(new Object[]{
+                        index + 1,
                         stat.getKurir().getNamaKurir(),
                         formatNumber(stat.getJumlahPenjemputan()),
                         formatNumber(stat.getTotalBerat())
@@ -329,9 +332,10 @@ public class DashboardView extends JFrame {
     }
 
     public void updateMasyarakatTable(List<HistoryPenjemputanModel> stats) {
-        updateTable(masyarakatTable, stats, (model, stat) -> {
+        updateTable(masyarakatTable, stats, (model, stat, index) -> {
             if (stat.getMasyarakat() != null) {
                 model.addRow(new Object[]{
+                        index + 1,
                         stat.getMasyarakat().getNamaLengkap(),
                         formatNumber(stat.getJumlahPenjemputan()),
                         formatNumber(stat.getTotalPoin())
@@ -341,9 +345,10 @@ public class DashboardView extends JFrame {
     }
 
     public void updateDropBoxTable(List<HistoryPenjemputanModel> stats) {
-        updateTable(dropboxTable, stats, (model, stat) -> {
+        updateTable(dropboxTable, stats, (model, stat, index) -> {
             if (stat.getDropBox() != null) {
                 model.addRow(new Object[]{
+                        index + 1,
                         stat.getDropBox().getNamaDropbox(),
                         formatNumber(stat.getJumlahPenjemputan()),
                         formatNumber(stat.getTotalBerat())
@@ -352,20 +357,22 @@ public class DashboardView extends JFrame {
         });
     }
 
+    @FunctionalInterface
+    private interface TableUpdater {
+        void update(DefaultTableModel model, HistoryPenjemputanModel stat, int index);
+    }
+
     private void updateTable(JTable table, List<HistoryPenjemputanModel> stats,
                              TableUpdater updater) {
         SwingUtilities.invokeLater(() -> {
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             model.setRowCount(0);
             if (stats != null) {
-                stats.forEach(stat -> updater.update(model, stat));
+                for (int i = 0; i < stats.size(); i++) {
+                    updater.update(model, stats.get(i), i);
+                }
             }
         });
-    }
-
-    @FunctionalInterface
-    private interface TableUpdater {
-        void update(DefaultTableModel model, HistoryPenjemputanModel stat);
     }
 
     private String formatNumber(Number value) {

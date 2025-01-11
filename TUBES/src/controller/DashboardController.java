@@ -70,11 +70,11 @@ public class DashboardController {
                     totalDropBox
             );
 
-            // 2. Mengambil statistik per kategori
-            List<HistoryPenjemputanModel> kategoriStats = getTotalPerKategori();
-            System.out.println("Loaded kategori stats: " + (kategoriStats != null ? kategoriStats.size() : 0) + " records");
-            if (kategoriStats != null && !kategoriStats.isEmpty()) {
-                dashboardView.updateKategoriTable(kategoriStats);
+            // 2. Mengambil statistik top 10 jenis sampah
+            List<HistoryPenjemputanModel> jenisSampahStats = getTop10JenisSampah();
+            System.out.println("Loaded jenis sampah stats: " + (jenisSampahStats != null ? jenisSampahStats.size() : 0) + " records");
+            if (jenisSampahStats != null && !jenisSampahStats.isEmpty()) {
+                dashboardView.updateJenisSampahTable(jenisSampahStats);
             }
 
             // 3. Mengambil statistik top kurir
@@ -96,13 +96,6 @@ public class DashboardController {
             System.out.println("Loaded dropbox stats: " + (dropboxStats != null ? dropboxStats.size() : 0) + " records");
             if (dropboxStats != null && !dropboxStats.isEmpty()) {
                 dashboardView.updateDropBoxTable(dropboxStats);
-            }
-
-            // 6. Mengambil aktivitas terbaru
-            List<HistoryPenjemputanModel> recentActivities = getRecentActivities();
-            if (recentActivities != null && !recentActivities.isEmpty()) {
-                // Update tabel history jika ada
-                System.out.println("Loaded recent activities: " + recentActivities.size() + " records");
             }
 
             System.out.println("Dashboard data loaded successfully");
@@ -153,13 +146,13 @@ public class DashboardController {
         }
     }
 
-    private List<HistoryPenjemputanModel> getTotalPerKategori() throws Exception {
+    private List<HistoryPenjemputanModel> getTop10JenisSampah() throws Exception {
         try (SqlSession session = MyBatisUtil.openSession()) {
             HistoryPenjemputanMapper mapper = session.getMapper(HistoryPenjemputanMapper.class);
-            List<HistoryPenjemputanModel> stats = mapper.getTotalPerKategori();
+            List<HistoryPenjemputanModel> stats = mapper.getTop10JenisSampah();
             return stats != null ? stats : new ArrayList<>();
         } catch (Exception e) {
-            throw new Exception("Error getting stats per kategori: " + e.getMessage());
+            throw new Exception("Error getting top 10 jenis sampah: " + e.getMessage());
         }
     }
 
