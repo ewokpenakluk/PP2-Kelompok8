@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.List;
 
 public class HistoryPenjemputanView extends JPanel {
@@ -45,12 +46,23 @@ public class HistoryPenjemputanView extends JPanel {
 
         // Table
         String[] columns = {
-                "ID", "Tanggal", "Masyarakat", "Kurir",
+                "No", "Tanggal", "Masyarakat", "Kurir",
                 "Jenis Sampah", "Lokasi", "Drop Box",
                 "Total Berat (kg)", "Total Poin"
         };
         historyTable = createTable(columns);
         JScrollPane scrollPane = new JScrollPane(historyTable);
+
+        // Set column widths
+        historyTable.getColumnModel().getColumn(0).setPreferredWidth(50);  // No
+        historyTable.getColumnModel().getColumn(1).setPreferredWidth(150); // Tanggal
+        historyTable.getColumnModel().getColumn(2).setPreferredWidth(150); // Masyarakat
+        historyTable.getColumnModel().getColumn(3).setPreferredWidth(150); // Kurir
+        historyTable.getColumnModel().getColumn(4).setPreferredWidth(150); // Jenis Sampah
+        historyTable.getColumnModel().getColumn(5).setPreferredWidth(200); // Lokasi
+        historyTable.getColumnModel().getColumn(6).setPreferredWidth(150); // Drop Box
+        historyTable.getColumnModel().getColumn(7).setPreferredWidth(100); // Total Berat
+        historyTable.getColumnModel().getColumn(8).setPreferredWidth(100); // Total Poin
 
         // Action Listeners
         addButton.addActionListener(e -> new TambahPenjemputanDialog((JFrame) SwingUtilities.getWindowAncestor(this)).setVisible(true));
@@ -108,20 +120,16 @@ public class HistoryPenjemputanView extends JPanel {
 
         // Apply renderers
         for (int i = 0; i < table.getColumnCount(); i++) {
-            if (isNumericColumn(table.getColumnName(i))) {
+            if (i == 0) { // Nomor selalu center
+                table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+            } else if (i == 7 || i == 8) { // Total Berat dan Total Poin right-aligned
                 table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
-            } else {
+            } else { // Kolom lainnya center
                 table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
             }
         }
 
         return table;
-    }
-
-    private boolean isNumericColumn(String columnName) {
-        return columnName.toLowerCase().contains("total") ||
-                columnName.toLowerCase().contains("berat") ||
-                columnName.toLowerCase().contains("poin");
     }
 
     public void loadData() {
@@ -133,9 +141,10 @@ public class HistoryPenjemputanView extends JPanel {
                     HistoryPenjemputanController.getInstance().getRecentActivities();
 
             if (histories != null) {
+                int nomor = 1; // Inisialisasi nomor urut
                 for (HistoryPenjemputanModel history : histories) {
                     model.addRow(new Object[]{
-                            history.getIdHistory(),
+                            nomor++,
                             history.getTanggalPenjemputan().format(dateFormatter),
                             history.getMasyarakat().getNamaLengkap(),
                             history.getKurir().getNamaKurir(),
@@ -164,6 +173,17 @@ public class HistoryPenjemputanView extends JPanel {
 
     private void exportToPDF() {
         try {
+            DefaultTableModel model = (DefaultTableModel) historyTable.getModel();
+
+            // Verify if there's data to export
+            if (model.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this,
+                        "Tidak ada data untuk diekspor",
+                        "Peringatan",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             PDFExporter.exportTableToPDF(historyTable, "LAPORAN PENJEMPUTAN SAMPAH", dateFormatter);
         } catch (Exception e) {
             showError("Error membuat PDF: " + e.getMessage());
